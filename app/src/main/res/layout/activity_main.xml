@@ -9,6 +9,8 @@
     tools:context="up1.hello.MainActivity">
 
     <EditText
+        android:inputType="none"
+        android:id="@+id/result"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -25,12 +27,17 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:id="@+id/firstOperand"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"/>
 
             <EditText
+                android:inputType="number"
+                android:id="@+id/secondOperand"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -39,6 +46,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/calculate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Calculate"/>
