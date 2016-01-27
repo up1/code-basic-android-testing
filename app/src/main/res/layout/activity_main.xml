@@ -45,6 +45,44 @@
 
         </LinearLayout>
 
+        <RadioGroup
+            android:id="@+id/operator"
+            android:checkedButton="@+id/plus"
+            android:weightSum="4"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/plus"
+                android:layout_weight="1"
+                android:text="+"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RadioButton
+                android:id="@+id/minus"
+                android:layout_weight="1"
+                android:text="-"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RadioButton
+                android:id="@+id/multiply"
+                android:layout_weight="1"
+                android:text="*"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RadioButton
+                android:id="@+id/divide"
+                android:text="/"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </RadioGroup>
+
         <Button
             android:id="@+id/calculate"
             android:layout_width="wrap_content"
