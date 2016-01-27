@@ -79,6 +79,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("result", result);
-        startActivity(intent);
+        startActivityForResult(intent, 999);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if( requestCode == 999 ) {
+            if(resultCode == RESULT_OK) {
+                resultEditText.setText(data.getStringExtra("back_message"));
+            }
+        }
     }
 }
