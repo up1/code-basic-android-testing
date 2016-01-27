@@ -9,14 +9,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
-
+    EditText messageEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
         TextView resultTextView = (TextView) findViewById(R.id.result);
-        final EditText messageEditText = (EditText) findViewById(R.id.message);
+        messageEditText = (EditText) findViewById(R.id.message);
         Button backButton = (Button) findViewById(R.id.back);
 
         Intent resultIntent = getIntent();
@@ -33,7 +33,13 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-
+    @Override
+    public void finish() {
+        Intent intent = new Intent();
+        intent.putExtra("back_message", messageEditText.getText().toString());
+        setResult(RESULT_OK, intent);
+        super.finish();
     }
 }
