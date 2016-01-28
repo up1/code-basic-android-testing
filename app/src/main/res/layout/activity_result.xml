@@ -8,23 +8,27 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context="up1.hello.ResultActivity">
 
     <TextView
         android:id="@+id/result"
-        android:text="Result = "
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:hint="0"
+        android:textSize="50sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/message"
+        android:gravity="center"
+        android:hint="please comment !!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/back"
-        android:text="Back to main"
+        android:text="Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

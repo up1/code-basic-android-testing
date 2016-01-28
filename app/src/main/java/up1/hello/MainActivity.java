@@ -1,35 +1,95 @@
 package up1.hello;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import up1.hello.data.CounterParcelable;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
-    EditText resultEditText;
+    private static final String TAG = MainActivity.class.getName();
+    public static final String COUNTER = "counter";
+
+    TextView resultEditText;
     EditText firstOperandEditText;
     EditText secondOperandEditText;
     Button calculateButton;
     RadioGroup operator;
+    TextView counterTextView;
+    TextView messageTextView;
+
+
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: ");
         setContentView(R.layout.activity_main);
         initialUI();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState: ");
+
+        CounterParcelable counterParcelable = new CounterParcelable();
+        counterParcelable.count = counter;
+        outState.putParcelable(COUNTER, counterParcelable);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(TAG, "onRestoreInstanceState: ");
+
+        CounterParcelable counterParcelable = savedInstanceState.getParcelable(COUNTER);
+        counter = counterParcelable.count;
+        showCounter();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+    }
+
+
     private void initialUI() {
-        resultEditText = (EditText) findViewById(R.id.result);
+        resultEditText = (TextView) findViewById(R.id.result);
         firstOperandEditText = (EditText) findViewById(R.id.firstOperand);
         secondOperandEditText = (EditText) findViewById(R.id.secondOperand);
         calculateButton = (Button) findViewById(R.id.calculate);
         operator = (RadioGroup) findViewById(R.id.operator);
+        counterTextView = (TextView) findViewById(R.id.counter);
+        messageTextView = (TextView) findViewById(R.id.message);
         calculateButton.setOnClickListener(this);
     }
 
@@ -37,7 +97,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(View v) {
         if (validateInput()) {
             calculate();
+            showCounter();
         }
+    }
+
+    private void showCounter() {
+        counter++;
+        counterTextView.setText(String.format("Counter is %d", counter));
     }
 
     private boolean validateInput() {
@@ -77,17 +143,37 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         resultEditText.setText(result);
 
+        //Send data to result activity
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("result", result);
-        startActivityForResult(intent, 999);
+
+        startActivityForResult(intent, 9999);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if( requestCode == 999 ) {
+        if(requestCode == 9999) {
             if(resultCode == RESULT_OK) {
-                resultEditText.setText(data.getStringExtra("back_message"));
+                String message = data.getStringExtra("message");
+                messageTextView.setText(message);
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
